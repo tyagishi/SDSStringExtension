@@ -120,6 +120,12 @@ extension String {
         return pos
     }
 }
+
+extension String {
+    public var fullNSRange: NSRange {
+        return NSRange(location: 0, length: (self as NSString).length)
+    }
+}
 extension NSString {
     public var fullNSRange: NSRange {
         NSRange(location: 0, length: self.length)
