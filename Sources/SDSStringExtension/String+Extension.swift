@@ -152,3 +152,18 @@ extension String {
         return nextLineSamePosIndex
     }
 }
+
+extension String {
+    public func currentLineRange(_ index: String.Index) -> Range<String.Index> {
+        let start = self.currentLineStart(index: index)
+        let end = self.currentLineEnd(index: index)
+        return Range(uncheckedBounds: (start,end))
+    }
+    public func currentLineNSRange(_ index: Int) -> NSRange {
+        let currentIndex = self.index(self.startIndex, offsetBy: index)
+        let start = self.currentLineStart(index: currentIndex)
+        let end = self.currentLineEnd(index: currentIndex)
+        let range = Range(uncheckedBounds: (start,end))
+        return self.nsRange(from: range)
+    }
+}
