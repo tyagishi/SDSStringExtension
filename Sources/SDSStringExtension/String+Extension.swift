@@ -126,12 +126,7 @@ extension String {
         return NSRange(location: 0, length: (self as NSString).length)
     }
     public var fullRange: Range<String.Index> {
-        return Range(uncheckedBounds: (self.startIndex, self.endIndex))
-    }
-}
-extension NSString {
-    public var fullNSRange: NSRange {
-        NSRange(location: 0, length: self.length)
+        self.startIndex..<self.endIndex
     }
 }
 
