@@ -8,7 +8,7 @@
 import Foundation
 
 extension StringProtocol {
-    func lineRanges() -> [Range<String.Index>] {
+    public func lineRanges() -> [Range<String.Index>] {
         if self == "" { return [] }
         let lines = self.split(omittingEmptySubsequences: false, whereSeparator: \.isNewline)
         var ret: [Range<String.Index>] = []
