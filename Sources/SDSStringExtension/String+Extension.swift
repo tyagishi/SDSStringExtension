@@ -7,6 +7,15 @@
 
 import Foundation
 
+
+extension String {
+    public func isValid(nsRange: NSRange) -> Bool {
+        guard 0 <= nsRange.location,
+              (nsRange.location + nsRange.length) <= self.count else { return false }
+        return true
+    }
+}
+
 extension String {
     public func lineNSRanges() -> [NSRange] {
         var ret: [NSRange] = []
@@ -163,5 +172,11 @@ extension String {
         let end = self.currentLineEnd(index: currentIndex)
         let range = Range(uncheckedBounds: (start,end))
         return self.nsRange(from: range)
+    }
+    public func lineNSRange(around location: Int) -> NSRange {
+        let locationIndex = self.rangeIndex(location: location)
+        let locationRange = locationIndex..<locationIndex
+        let lineRange = self.lineRange(for: locationRange)
+        return self.nsRange(from: lineRange)
     }
 }
