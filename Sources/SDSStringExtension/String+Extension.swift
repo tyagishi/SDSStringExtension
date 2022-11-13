@@ -167,6 +167,8 @@ extension String {
         return Range(uncheckedBounds: (start,end))
     }
     public func currentLineNSRange(_ index: Int) -> NSRange {
+        // MARK: sometimes TextView's selectedRange has (String.count+1) as location. need to check and treat it as end of string
+        if self.count < index { return NSRange(location: self.count, length: 0) }
         let currentIndex = self.index(self.startIndex, offsetBy: index)
         let start = self.currentLineStart(index: currentIndex)
         let end = self.currentLineEnd(index: currentIndex)
