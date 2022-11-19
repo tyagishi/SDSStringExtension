@@ -10,8 +10,9 @@ import Foundation
 
 extension String {
     public func isValid(nsRange: NSRange) -> Bool {
+        let length = self.utf16.count
         guard 0 <= nsRange.location,
-              (nsRange.location + nsRange.length) <= self.count else { return false }
+              (nsRange.location + nsRange.length) <= length else { return false }
         return true
     }
 }
