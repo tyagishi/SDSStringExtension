@@ -26,4 +26,18 @@ extension StringProtocol {
         }
         return ret
     }
+
+    // using StringProtocol.range(of:...)
+    public func allRange(of str: any StringProtocol, options mask: String.CompareOptions = [],
+                  range searchRange: Range<String.Index>, locale: Locale? = nil) -> [Range<String.Index>]?{
+        var results: [Range<String.Index>] = []
+        var loopSearchRange = searchRange
+        while let found = self.range(of: str, options: mask, range: loopSearchRange, locale: locale),
+              !loopSearchRange.isEmpty {
+            results.append(found)
+            loopSearchRange = Range(uncheckedBounds: (found.upperBound, searchRange.upperBound))
+        }
+        if results.isEmpty { return nil }
+        return results
+    }
 }
