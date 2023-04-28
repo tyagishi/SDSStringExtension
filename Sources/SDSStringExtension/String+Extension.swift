@@ -38,11 +38,17 @@ extension String {
     }
 }
 
-// NSRange <-> Range
-extension String {
+extension StringProtocol {
     public func nsRange(from range: Range<String.Index>) -> NSRange {
         return NSRange(range, in: self)
     }
+}
+
+// NSRange <-> Range
+extension String {
+//    public func nsRange(from range: Range<String.Index>) -> NSRange {
+//        return NSRange(range, in: self)
+//    }
     public func range(from nsRange: NSRange) -> Range<String.Index>? {
         return Range(nsRange, in: self)
     }
