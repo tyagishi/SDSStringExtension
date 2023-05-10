@@ -32,4 +32,15 @@ final class StringProtocolExtension_Tests: XCTestCase {
             XCTAssertEqual(sut[result], "test")
         }
     }
+
+    func test_withoutLastNewLine() async throws {
+        let sut1 = "hello"
+        XCTAssertEqual(sut1.withoutLastNewLine as? String, "hello")
+
+        let sut2 = "hello\n"
+        XCTAssertEqual(sut2.withoutLastNewLine as? Substring, "hello")
+        
+        let sut3 = "hello\nworld"
+        XCTAssertEqual(sut3.withoutLastNewLine as? String, "hello\nworld")
+    }
 }

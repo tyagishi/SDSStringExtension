@@ -40,4 +40,11 @@ extension StringProtocol {
         if results.isEmpty { return nil }
         return results
     }
+
+    public var withoutLastNewLine: any StringProtocol {
+        if self.hasSuffix("\n") {
+            return self.dropLast()
+        }
+        return self
+    }
 }
