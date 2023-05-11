@@ -47,4 +47,21 @@ extension StringProtocol {
         }
         return self
     }
+
+    public var dropFirstLine: any StringProtocol {
+        if let firstNewLineIndex = self.firstIndex(of: "\n") {
+            let range = self.index(after: firstNewLineIndex)..<self.endIndex
+            return self[range]
+        } else { // no new line
+            return ""
+        }
+    }
+    public var dropLastLine: any StringProtocol {
+        if let lastNewLineIndex = self.withoutLastNewLine.lastIndex(of: "\n") {
+            let range = self.startIndex..<self.index(after: lastNewLineIndex)
+            return self[range]
+        } else { // no new line
+            return ""
+        }
+    }
 }
