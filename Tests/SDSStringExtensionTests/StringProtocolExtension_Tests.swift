@@ -89,4 +89,35 @@ final class StringProtocolExtension_Tests: XCTestCase {
         let sut6 = "\nhello\nworld\nanother\n"
         XCTAssertEqual(sut6.dropLastLine as? Substring, "\nhello\nworld\n")
     }
+
+    func test_dropFirstLastLine() async throws {
+        let sut1 = "hello"
+        XCTAssertEqual(sut1.dropFirstLine.dropLastLine as? String, "")
+        XCTAssertEqual(sut1.dropLastLine.dropFirstLine as? String, "")
+
+        let sut1n = "hello\n"
+        XCTAssertEqual(sut1n.dropFirstLine.dropLastLine as? String, "")
+        XCTAssertEqual(sut1n.dropLastLine.dropFirstLine as? String, "")
+
+        let sut2 = ""
+        XCTAssertEqual(sut2.dropFirstLine.dropLastLine as? String, "")
+        XCTAssertEqual(sut2.dropLastLine.dropFirstLine as? String, "")
+
+        let sut3 = "hello\nworld"
+        XCTAssertEqual(sut3.dropFirstLine.dropLastLine as? String, "")
+        XCTAssertEqual(sut3.dropLastLine.dropFirstLine as? Substring, "")
+
+        let sut4 = "hello\nworld\nanother"
+        XCTAssertEqual(sut4.dropFirstLine.dropLastLine as? Substring, "world\n")
+        XCTAssertEqual(sut4.dropLastLine.dropFirstLine as? Substring, "world\n")
+
+        let sut5 = "hello\nworld\nanother\n"
+        XCTAssertEqual(sut5.dropFirstLine.dropLastLine as? Substring, "world\n")
+        XCTAssertEqual(sut5.dropLastLine.dropFirstLine as? Substring, "world\n")
+
+        let sut6 = "\nhello\nworld\nanother\n"
+        XCTAssertEqual(sut6.dropFirstLine.dropLastLine as? Substring, "hello\nworld\n")
+        XCTAssertEqual(sut6.dropLastLine.dropFirstLine as? Substring, "hello\nworld\n")
+    }
+    
 }
