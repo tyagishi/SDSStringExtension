@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension String {
     public func isValid(nsRange: NSRange) -> Bool {
         let length = self.utf16.count
@@ -21,7 +20,7 @@ extension String {
     public func lineNSRanges() -> [NSRange] {
         var ret: [NSRange] = []
         var pos = NSRange(location: 0, length: 0)
-        while ( pos.location < (self as NSString).length) {
+        while pos.location < (self as NSString).length {
             // pos の行のNSRange を取得
             let lineRange = (self as NSString).lineRange(for: pos)
             ret.append(lineRange)
@@ -29,7 +28,7 @@ extension String {
         }
         return ret
     }
-    
+
     public func substring(nsRange: NSRange) -> Substring {
         guard let range = Range(nsRange, in: self) else {
             fatalError("invalid nsRange")
@@ -52,7 +51,7 @@ extension String {
     public func range(from nsRange: NSRange) -> Range<String.Index>? {
         return Range(nsRange, in: self)
     }
-    
+
     public func rangeIndex(location: Int) -> String.Index {
         return self.index(self.startIndex, offsetBy: location)
     }
@@ -109,7 +108,7 @@ extension String {
         guard let nextLineStartIndex = nextLineStart(index: index) else { return self.endIndex }
         return self.index(nextLineStartIndex, offsetBy: -1)
     }
-    
+
     public func nextLineStart(location: Int) -> Int? {
         let rangeLocation = self.rangeIndex(location: location)
         guard let result = nextLineStart(index: rangeLocation) else { return nil }
@@ -122,13 +121,11 @@ extension String {
         return self.currentLineStart(index: prevNewline)
     }
 
-    
     public func nextLineStart(index currentPos: String.Index) -> String.Index? {
         var pastNewLine = false
         var pos = currentPos
         while pos < self.endIndex,
               pastNewLine == false {
-            
             pastNewLine = self[pos].isNewline
             pos = self.index(after: pos)
         }
@@ -171,15 +168,16 @@ extension String {
     public func currentLineRange(_ index: String.Index) -> Range<String.Index> {
         let start = self.currentLineStart(index: index)
         let end = self.currentLineEnd(index: index)
-        return Range(uncheckedBounds: (start,end))
+        return Range(uncheckedBounds: (start, end))
     }
     public func currentLineNSRange(_ index: Int) -> NSRange {
-        // MARK: sometimes TextView's selectedRange has (String.count+1) as location. need to check and treat it as end of string
+        // MARK: sometimes TextView's selectedRange has (String.count+1) as location.
+        //       need to check and treat it as end of string
         if self.count < index { return NSRange(location: self.count, length: 0) }
         let currentIndex = self.index(self.startIndex, offsetBy: index)
         let start = self.currentLineStart(index: currentIndex)
         let end = self.currentLineEnd(index: currentIndex)
-        let range = Range(uncheckedBounds: (start,end))
+        let range = Range(uncheckedBounds: (start, end))
         return self.nsRange(from: range)
     }
     public func lineNSRange(around location: Int) -> NSRange {

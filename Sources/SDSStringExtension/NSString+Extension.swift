@@ -12,4 +12,3 @@ extension NSString {
         return NSRange(location: 0, length: (self as NSString).length)
     }
 }
-
