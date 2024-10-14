@@ -8,7 +8,7 @@
 import Foundation
 
 extension Substring {
-    var dotSuffix: Substring? {
+    public var dotSuffix: Substring? {
         guard let dotIndex = self.lastIndex(of: ".") else { return nil }
         let nextIndex = self.index(after: dotIndex)
         return self[nextIndex...]
@@ -16,7 +16,7 @@ extension Substring {
 }
 
 extension String {
-    var dotSuffix: Substring? {
+    public var dotSuffix: Substring? {
         guard let dotIndex = self.lastIndex(of: ".") else { return nil }
         let nextIndex = self.index(after: dotIndex)
         return self[nextIndex...]
