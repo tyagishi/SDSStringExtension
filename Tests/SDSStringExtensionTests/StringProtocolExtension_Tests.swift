@@ -119,5 +119,18 @@ final class StringProtocolExtension_Tests: XCTestCase {
         XCTAssertEqual(sut6.dropFirstLine.dropLastLine as? Substring, "hello\nworld\n")
         XCTAssertEqual(sut6.dropLastLine.dropFirstLine as? Substring, "hello\nworld\n")
     }
+
+    func test_string_retrieveUntil() throws {
+        let sut = "1 + 1 = "
+        let result = sut.retrieveUntil("=")
+        XCTAssertEqual(result, "1 + 1 ")
+    }
     
+    func test_substring_retrieveUntil() throws {
+        let base = "1 + 1 = "
+        let sut = base[base.startIndex..<(base.index(before: base.endIndex))]
+        let result = sut.retrieveUntil("=")
+        XCTAssertEqual(result, "1 + 1 ")
+    }
+
 }

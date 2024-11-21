@@ -64,4 +64,9 @@ extension StringProtocol {
             return ""
         }
     }
+    
+    public func retrieveUntil(_ character: Character) -> Self.SubSequence? {
+        guard let lastIndex = self.lastIndex(of: character) else { return nil }
+        return self[self.startIndex..<lastIndex]
+    }
 }
