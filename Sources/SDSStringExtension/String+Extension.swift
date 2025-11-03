@@ -187,3 +187,25 @@ extension String {
         return self.nsRange(from: lineRange)
     }
 }
+
+#if canImport(AppKit)
+import AppKit
+#endif
+#if canImport(UIKit)
+import UIKit
+#endif
+#if canImport(AppKit) || canImport(UIKit)
+extension String {
+    #if canImport(AppKit)
+    public typealias NSUIFont = NSFont
+    #elseif canImport(UIKit)
+    public typealias NSUIFont = UIFont
+    #endif
+    public func size(_ style: NSUIFont.TextStyle = .body) -> CGSize {
+        return (self as NSString).size(withAttributes: [.font: NSUIFont.preferredFont(forTextStyle: style)])
+    }
+    public func size(_ font: NSUIFont) -> CGSize {
+        return (self as NSString).size(withAttributes: [.font: font])
+    }
+}
+#endif
