@@ -31,5 +31,6 @@ let package = Package(
         .testTarget(
             name: "SDSStringExtensionTests",
             dependencies: ["SDSStringExtension"]),
-    ]
+    ],
+    swiftLanguageVersions: [.version("6")]
 )
